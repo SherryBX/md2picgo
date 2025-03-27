@@ -105,14 +105,13 @@ def process_markdown_file(file_path, max_workers=3, convert_to_wp=False, image_p
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # 匹配两种格式的本地图片链接和 Gitee 图片
+        # 匹配本地图片链接
         local_patterns = [
             # 普通格式：![...](C:\path\to\image.png)
             r'!\[.*?\]\(([A-Z]:\\[^)\n]+\.(?:png|jpg|jpeg|gif|bmp))\)?',
             # Obsidian格式：![[path/to/image.png]]
             r'!\[\[([^]\n]+\.(?:png|jpg|jpeg|gif|bmp))\]\]'
         ]
-        gitee_pattern = r'!\[.*?\]\((https://gitee\.com/[^)\n]+)\)?'
         
         # 处理本地图片
         results = {}
@@ -131,10 +130,8 @@ def process_markdown_file(file_path, max_workers=3, convert_to_wp=False, image_p
                 # 处理 Obsidian 格式的路径
                 if not local_path.startswith(('C:', 'D:', 'E:')):
                     if image_path_prefix:
-                        # 使用配置的前缀路径
                         local_path = os.path.join(image_path_prefix, local_path)
                     else:
-                        # 使用默认的相对路径处理
                         base_dir = os.path.dirname(file_path)
                         local_path = os.path.join(base_dir, 'Z-附件', local_path)
                 
@@ -206,4 +203,23 @@ def process_vault(path, convert_to_wp=False, image_path_prefix=""):
                                image_path_prefix=image_path_prefix)
         safe_print("所有文件处理完成！🎉", level="success")
     else:
-        safe_print("请提供有效的markdown文件或目录路径 ⚠️", level="warning") 
+        safe_print("请提供有效的markdown文件或目录路径 ⚠️", level="warning")
+
+class ImageUploader:
+    def __init__(self, api_url, token=None):
+        self.api_url = api_url
+        self.headers = {'Authorization': f'Bearer {token}'} if token else {}
+        
+    def upload(self, image_path):
+        try:
+            with open(image_path, 'rb') as f:
+                files = {'image': f}
+                response = requests.post(self.api_url, 
+                                      files=files,
+                                      headers=self.headers)
+                if response.status_code == 200:
+                    return response.json()['url']  # 假设API返回JSON格式包含url字段
+                else:
+                    raise Exception(f'Upload failed: {response.text}')
+        except Exception as e:
+            raise Exception(f'Upload error: {str(e)}') 

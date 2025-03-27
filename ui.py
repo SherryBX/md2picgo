@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, 
                            QHBoxLayout, QLabel, QPushButton, QFileDialog, QCheckBox, QTextEdit,
-                           QDialog, QLineEdit, QFormLayout, QGraphicsDropShadowEffect)
+                           QDialog, QLineEdit, QFormLayout, QGraphicsDropShadowEffect, QComboBox)
 from PyQt5.QtCore import Qt, QTimer, QPoint
 from PyQt5.QtGui import QDragEnterEvent, QDropEvent, QColor, QTextCharFormat, QBrush, QIcon
 import os
@@ -295,7 +295,7 @@ class ConfigDialog(QDialog):
         
         # 图片路径前缀输入框
         self.path_prefix = QLineEdit()
-        self.path_prefix.setPlaceholderText('例如: E:\\笔记\\Sherry\'s storehouse\\Z-附件')
+        self.path_prefix.setPlaceholderText('例如: E:\\笔记\\附件')
         if parent and parent.image_path_prefix:
             self.path_prefix.setText(parent.image_path_prefix)
         
@@ -385,6 +385,7 @@ class ConfigDialog(QDialog):
 class MainWindow(QMainWindow):
     def __init__(self, process_markdown_file, process_vault):
         super().__init__()
+        self.setWindowIcon(QIcon('icon/hello kitty.ico'))  # 设置窗口图标
         self.process_markdown_file = process_markdown_file
         self.process_vault = process_vault
         self.moving = False

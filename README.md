@@ -1,10 +1,10 @@
-# 🚀 Obsidian-to-PicGo
+# 🚀 md2picgo
 
-> 🎨 一个优雅的 Obsidian 图片上传工具 | Made with ❤️ by Sherry
+> 🎨 一个优雅的 Markdown 图片上传工具 | Made with ❤️ by Sherry
 
 ## ✨ 特性
 
-- 🖼️ 自动将 Obsidian 中的本地图片上传至图床
+- 🖼️ 自动将 Markdown 中的本地图片上传至图床
 - 🔄 支持批量处理整个文件夹
 - 🎯 支持拖拽上传文件
 - 🌈 多线程并行上传，效率更高
@@ -37,7 +37,7 @@ python main.py
 
 ## 🎨 界面预览
 
-![程序界面](界面截图链接)
+![](https://gitee.com/SherryBX/img/raw/master/202503271051841.png)
 
 ## 🔧 依赖
 

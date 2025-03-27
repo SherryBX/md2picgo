@@ -121,8 +121,8 @@ class MainWindow(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle('Markdown 图片上传工具')
-        self.setMinimumSize(500, 300)
-        self.setMaximumSize(500, 300)
+        self.setMinimumSize(500, 400)
+        self.setMaximumSize(500, 400)
 
         # 创建中心部件和布局
         central_widget = QWidget()

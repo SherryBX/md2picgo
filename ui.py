@@ -121,62 +121,47 @@ class MainWindow(QMainWindow):
 
     def initUI(self):
         self.setWindowTitle('Markdown 图片上传工具')
-        self.setMinimumSize(800, 600)
+        self.setMinimumSize(500, 300)
+        self.setMaximumSize(500, 300)
 
         # 创建中心部件和布局
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout(central_widget)
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(5)
 
         # 创建拖拽区域
         self.drop_area = DropArea(self)
+        self.drop_area.setMinimumHeight(120)
         layout.addWidget(self.drop_area)
 
         # 创建按钮区域
         button_layout = QHBoxLayout()
+        button_layout.setSpacing(5)
         
         self.select_file_btn = QPushButton('选择文件')
-        self.select_file_btn.clicked.connect(self.select_files)
-        
         self.select_dir_btn = QPushButton('选择目录')
-        self.select_dir_btn.clicked.connect(self.select_directory)
-        
-        # 添加WordPress转换复选框
         self.wp_checkbox = QCheckBox('转换为WordPress图片链接')
-        
-        # 添加清空日志按钮
         self.clear_log_btn = QPushButton('清空日志')
-        self.clear_log_btn.clicked.connect(self.clear_log)
-        self.clear_log_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #f8f9fa;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                padding: 4px 8px;
-                color: #666;
-            }
-            QPushButton:hover {
-                background-color: #e9ecef;
-                border-color: #ccc;
-            }
-            QPushButton:pressed {
-                background-color: #dde2e6;
-            }
-        """)
+        
+        for btn in [self.select_file_btn, self.select_dir_btn]:
+            btn.setFixedWidth(80)
         
         button_layout.addWidget(self.select_file_btn)
         button_layout.addWidget(self.select_dir_btn)
         button_layout.addWidget(self.wp_checkbox)
-        button_layout.addStretch()  # 添加弹性空间
+        button_layout.addStretch()
         button_layout.addWidget(self.clear_log_btn)
         
         layout.addLayout(button_layout)
 
-        # 添加日志显示区域
+        # 日志显示区域
         self.log_display = LogDisplay()
+        self.log_display.setMinimumHeight(80)
         layout.addWidget(self.log_display)
         
-        # 状态标签放在最下方
+        # 状态标签
         self.status_label = QLabel('准备就绪')
         self.status_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.status_label)

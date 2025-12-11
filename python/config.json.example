@@ -1,0 +1,15 @@
+{
+  "image_host": {
+    "type": "gitee",
+    "config": {
+      "server": "http://127.0.0.1:36677"
+    }
+  },
+  "wordpress": {
+    "enabled": false,
+    "remove_prefix": false
+  },
+  "image_path_prefix": "",
+  "max_workers": 3,
+  "max_retries": 3
+}

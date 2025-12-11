@@ -1,0 +1,15 @@
+PyQt5>=5.15.0
+requests>=2.25.0
+
+# 图床SDK（可选，根据需要安装）
+cos-python-sdk-v5>=1.9.0  # 腾讯云COS
+oss2>=2.15.0  # 阿里云OSS
+qiniu>=7.4.0  # 七牛云
+
+# 打包工具
+pyinstaller>=5.0.0
+
+# 测试框架（可选）
+pytest>=7.0.0
+pytest-qt>=4.0.0
+hypothesis>=6.0.0
